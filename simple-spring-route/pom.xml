@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>camel-ride</artifactId>
+    <groupId>com.camel.ride</groupId>
+    <version>1.0</version>
+  </parent>
+
+ 
+  <artifactId>simple-spring-route</artifactId>
+  <packaging>bundle</packaging>
+  
+
+  <name>A Camel Spring-DM Route</name>
+  <url>http://www.myorganization.org</url>
+
+  
+
+  <dependencies>
+    <dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+		</dependency>
+		<!-- ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+		</dependency>
+
+    <!-- logging -->
+    <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+   
+  </dependencies>
+
+  <build>
+  <resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+    
+
+    <plugins>
+      
+      
+
+      <!-- allows the route to be ran via 'mvn camel:run' -->
+      <plugin>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-maven-plugin</artifactId>
+       
+      </plugin>
+
+      <!-- to generate the MANIFEST-FILE of the bundle -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>simple-spring-route</Bundle-SymbolicName>
+            <Private-Package>com.camel.ride.simple.spring.route.*</Private-Package>
+            <Import-Package>org.slf4j;version=${slf4j.version},
+							*</Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

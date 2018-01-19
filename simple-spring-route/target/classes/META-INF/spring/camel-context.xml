@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:osgi="http://www.springframework.org/schema/osgi"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean class="com.camel.ride.simple.spring.route.JavaRouteBuilder" id="javaRoute">
+        <property name="inputDir" value="in?noop=true"/>
+        <property name="outputQueue" value="orders"/>
+    </bean>
+    <bean class="org.apache.camel.component.jms.JmsComponent" id="jms">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="vm://localhost"/>
+            </bean>
+        </property>
+    </bean>
+    <camelContext id="camelContext-1f5b4f62-e11c-49d6-af30-9e44a0ea4bd6" xmlns="http://camel.apache.org/schema/spring">
+        <routeBuilder ref="javaRoute"/>
+    </camelContext>
+</beans>
